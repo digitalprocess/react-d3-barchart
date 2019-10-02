@@ -1,20 +1,22 @@
 import React from 'react'
 import Dropdown from 'react-bootstrap/Dropdown'
 
+const capitlize = word => word.charAt(0).toUpperCase() + word.slice(1)
+
 const GenderDropdown = ({gender, genderSelected}) => (
 	<Dropdown>
 		<Dropdown.Toggle variant="info" id="dropdown-basic">
-			{gender.toUpperCase()}
+			{capitlize(gender)}
 		</Dropdown.Toggle>
 
 		<Dropdown.Menu>
 			{gender !== 'men' ?
 				<Dropdown.Item onSelect={() => genderSelected('men')}>
-					MEN
+					Men
 				</Dropdown.Item>
 				:
 				<Dropdown.Item onSelect={() => genderSelected('women')}>
-					WOMEN
+					Women
 				</Dropdown.Item>
 			}
 		</Dropdown.Menu>

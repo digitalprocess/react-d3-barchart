@@ -13,7 +13,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<Navbar bg="light">
+			<Navbar bg="light" className="justify-content-center">
 				<Navbar.Brand>The World's Tallest People</Navbar.Brand>
 			</Navbar>
 			<Container>
