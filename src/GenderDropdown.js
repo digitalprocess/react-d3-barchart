@@ -1,18 +1,22 @@
 import React from 'react'
 import Dropdown from 'react-bootstrap/Dropdown'
 
-const GenderDropdown = ({genderSelected}) => (
+const GenderDropdown = ({gender, genderSelected}) => (
 	<Dropdown>
 		<Dropdown.Toggle variant="info" id="dropdown-basic">
-			Please Select Gender
+			{gender.toUpperCase()}
 		</Dropdown.Toggle>
 
 		<Dropdown.Menu>
-			{['Men', 'Women'].map(gender => (
-				<Dropdown.Item key={gender} onSelect={() => genderSelected(gender.toLocaleLowerCase())}>
-					{gender}
+			{gender !== 'men' ?
+				<Dropdown.Item onSelect={() => genderSelected('men')}>
+					MEN
 				</Dropdown.Item>
-			))}
+				:
+				<Dropdown.Item onSelect={() => genderSelected('women')}>
+					WOMEN
+				</Dropdown.Item>
+			}
 		</Dropdown.Menu>
 	</Dropdown>
 )
