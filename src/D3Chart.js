@@ -21,12 +21,12 @@ class D3Chart {
 			.attr('y', HEIGHT + 50)
 			.attr('text-anchor', 'middle')
 
-		vis.svg.append('text')
+		vis.yLabel = vis.svg.append('text')
 			.attr('x', -(HEIGHT / 2))
 			.attr('y', -50)
 			.attr('text-anchor', 'middle')
-			.text('Height in cm')
 			.attr('transform', 'rotate(-90)')
+			.text('Height in cm')
 
 		vis.xAxisGroup = vis.svg.append('g')
 			.attr('transform', `translate(0, ${HEIGHT})`)
@@ -90,12 +90,11 @@ class D3Chart {
 		rects.enter().append('rect')
 			.attr('x', d => x(d.name))
 			.attr('width', x.bandwidth)
-			.attr('fill', 'grey')
+			.attr('fill', '#138496')
 			.attr('y', HEIGHT)
 			.transition().duration(500)
 				.attr('height', d => HEIGHT - y(d.height))
 				.attr('y', d => y(d.height))
-
 	}
 }
 
