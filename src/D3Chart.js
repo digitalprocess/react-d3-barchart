@@ -6,6 +6,7 @@ const HEIGHT = 500 - MARGIN.TOP - MARGIN.BOTTOM // height of the "canvas"
 
 class D3Chart {
 	constructor(element) {
+		// declare the visualization object
 		const vis = this
 
 		vis.svg = d3.select(element)
@@ -15,11 +16,10 @@ class D3Chart {
 			.append('g')
 				.attr('transform', `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`)
 
-		vis.svg.append('text')
+		vis.xLabel = vis.svg.append('text')
 			.attr('x', WIDTH / 2)
 			.attr('y', HEIGHT + 50)
 			.attr('text-anchor', 'middle')
-			.text("The world's tallest men")
 
 		vis.svg.append('text')
 			.attr('x', -(HEIGHT / 2))
@@ -37,22 +37,18 @@ class D3Chart {
 			d3.json('https://udemy-react-d3.firebaseio.com/tallest_men.json'),
 			d3.json('https://udemy-react-d3.firebaseio.com/tallest_women.json'),
 		]).then(datasets => {
-			const [men, women] = datasets
-			let flag = true
-
-			vis.data = men
-			vis.update()
-
-			d3.interval(() => {
-				vis.data = flag ? men : women
-				vis.update()
-				flag =! flag
-			}, 1000)
+			vis.menData = datasets[0]
+			vis.womenData = datasets[1]
+			vis.update('men')
 		})
 	}
 
-	update() {
+	update(gender) {
+		// declare the visualization object
 		const vis = this
+
+		vis.data = (gender === 'men') ? vis.menData : vis.womenData
+		vis.xLabel.text(`The world's tallest ${gender}`)
 
 		const y = d3.scaleLinear()
 			.domain([
